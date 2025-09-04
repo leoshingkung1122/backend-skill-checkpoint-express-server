@@ -1,12 +1,11 @@
 # Question & Answer API Server
 
-A RESTful API server built with Express.js and PostgreSQL for managing questions, answers, and voting system.
+A RESTful API server built with Express.js and PostgreSQL for managing questions and answers.
 
 ## Features
 
 - **Question Management**: Create, read, update, delete, and search questions
 - **Answer System**: Add answers to questions with character limit validation
-- **Voting System**: Upvote/downvote questions and answers
 - **Category Support**: Organize questions by categories
 - **Search Functionality**: Search questions by title or category
 
@@ -15,8 +14,6 @@ A RESTful API server built with Express.js and PostgreSQL for managing questions
 The API uses PostgreSQL with the following tables:
 - `questions`: Stores question data (id, title, description, category)
 - `answers`: Stores answers linked to questions (id, question_id, content)
-- `question_votes`: Stores votes for questions (id, question_id, vote)
-- `answer_votes`: Stores votes for answers (id, answer_id, vote)
 
 ## API Endpoints
 
@@ -72,20 +69,6 @@ The API uses PostgreSQL with the following tables:
 - **Success**: `200 OK` - `{"message": "All answers for the question have been deleted successfully."}`
 - **Error**: `404 Not Found` - `{"message": "Question not found."}`
 
-### Voting
-
-#### Vote on question
-- **POST** `/questions/:questionId/vote`
-- **Body**: `{"vote": 1}` (upvote) or `{"vote": -1}` (downvote)
-- **Success**: `200 OK` - `{"message": "Vote on the question has been recorded successfully."}`
-- **Error**: `400 Bad Request` - `{"message": "Invalid vote value."}`
-
-#### Vote on answer
-- **POST** `/answers/:answerId/vote`
-- **Body**: `{"vote": 1}` (upvote) or `{"vote": -1}` (downvote)
-- **Success**: `200 OK` - `{"message": "Vote on the answer has been recorded successfully."}`
-- **Error**: `400 Bad Request` - `{"message": "Invalid vote value."}`
-
 ## Installation & Setup
 
 1. Install dependencies:
@@ -108,8 +91,7 @@ The server will run on `http://localhost:4000`
 ├── app.mjs                 # Main application file
 ├── routes/
 │   ├── questions.mjs      # Question management routes
-│   ├── answers.mjs        # Answer management routes
-│   └── votes.mjs          # Voting system routes
+│   └── answers.mjs        # Answer management routes
 ├── utils/
 │   └── db.mjs             # Database connection
 └── package.json           # Dependencies and scripts
